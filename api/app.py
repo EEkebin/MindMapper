@@ -28,7 +28,7 @@ def verify_password(password: str, hashed_password: str) -> bool:
 
 @app.route('/api')
 def hello_world():
-    return 'Welcome to MindMapper API!'
+    return 'Welcome to MindMapper API!\nVersion 1.0\nThis is supposed to be uninteractive. Please use the Web Application.'
 
 
 @app.route('/api/create_user/<username>/<password>', methods=['POST'])
@@ -235,4 +235,4 @@ def get_habit_history(username, password, habit_name):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
