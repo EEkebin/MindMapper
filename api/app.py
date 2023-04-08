@@ -1,12 +1,16 @@
+# Import Dependencies from libraries
 from flask import Flask, jsonify, make_response
 from flask_cors import CORS
 import psycopg2
 import os
 import bcrypt
 
+# Create a Flask app with CORS enabled
 app = Flask(__name__)
 CORS(app)
 
+
+# Connect to the database
 conn = psycopg2.connect(
     host="74.207.249.96",
     database="mindmapperdb",
@@ -16,6 +20,7 @@ conn = psycopg2.connect(
 )
 
 
+# Encrypt and verify passwords using bcrypt library
 def encrypt_password(password: str) -> str:
     salt = bcrypt.gensalt()
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
@@ -26,11 +31,13 @@ def verify_password(password: str, hashed_password: str) -> bool:
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 
+# Create a route for the app
 @app.route('/api')
 def hello_world():
     return 'Welcome to MindMapper API!\nVersion 1.0\nThis is supposed to be uninteractive. Please use the Web Application.'
 
 
+# Create user
 @app.route('/api/create_user/<username>/<password>', methods=['POST'])
 def create_user(username, password):
     cur = conn.cursor()
@@ -92,6 +99,7 @@ def get_user(username, password):
         cur.close()
 
 
+# Get user id
 @app.route('/api/get_userid/<username>/<password>', methods=['GET'])
 def get_userid(username, password):
     cur = conn.cursor()
@@ -133,6 +141,7 @@ def login_user(username, password):
         cur.close()
 
 
+# Get all habits
 @app.route('/api/get_user_habits/<username>/<password>', methods=['GET'])
 def get_user_habits(username, password):
     cur = conn.cursor()
@@ -150,6 +159,7 @@ def get_user_habits(username, password):
         cur.close()
 
 
+# Create habit
 @app.route('/api/create_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>/<goal_value>', methods=['POST'])
 def create_habit(username, password, habit_name, metric_name, metric_value, goal_value):
     cur = conn.cursor()
@@ -168,6 +178,7 @@ def create_habit(username, password, habit_name, metric_name, metric_value, goal
         cur.close()
 
 
+# Delete habit
 @app.route('/api/delete_habit/<username>/<password>/<habit_name>', methods=['DELETE'])
 def delete_habit(username, password, habit_name):
     try:
@@ -183,6 +194,7 @@ def delete_habit(username, password, habit_name):
         return str(e)
 
 
+# Update habit
 @app.route('/api/update_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>', methods=['PUT'])
 def update_habit(username, password, habit_name, metric_name, metric_value):
     try:
@@ -234,5 +246,6 @@ def get_habit_history(username, password, habit_name):
         return "Error: " + str(e)
 
 
+# Run the flask api server
 if __name__ == '__main__':
     app.run()

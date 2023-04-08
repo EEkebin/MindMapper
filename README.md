@@ -1,6 +1,6 @@
 # MindMapper
 
-> A Habit Tracking web application to help manage your habits for personal well being. Whether it is dealing with stress of overeating, quit smoking, or exercising daily, MindMapper is an app that is built on a foundation of Open-Source Software and Technologies. The following are all of the Technologies used.
+> A Habit Tracking web application to help manage your habits for personal well being. Whether it is dealing with stress of overeating, tracking nicotine intake, and/or exercising daily, MindMapper makes it easy to help you help yourself. MindMapper is an app that is built on a foundation of Open-Source Software and Technologies. The following are all of the Technologies used.
 
 
 <table>
@@ -17,7 +17,7 @@
 
 ## Further Documentation:
 ### [Server Documentation](https://github.com/EEkebin/MindMapper/blob/main/Documentation/Server.md)
-> For server setup and configation.
+> For server setup and configuration.
 
 ### [Web Application Documentation](https://github.com/EEkebin/MindMapper/blob/main/Documentation/App.md)
 > For application setup.
