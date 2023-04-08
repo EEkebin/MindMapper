@@ -51,10 +51,12 @@ def create_user(username, password):
 def delete_user(username, password):
     cur = conn.cursor()
     try:
-        cur.execute("SELECT * FROM user_credentials WHERE username = %s", (username,))
+        cur.execute(
+            "SELECT * FROM user_credentials WHERE username = %s", (username,))
         user = cur.fetchone()
         if verify_password(password, user[2]):
-            cur.execute("DELETE FROM user_credentials WHERE username = %s", (username,))
+            cur.execute(
+                "DELETE FROM user_credentials WHERE username = %s", (username,))
             conn.commit()
             return 'User deleted!'
         else:
@@ -67,13 +69,13 @@ def delete_user(username, password):
         cur.close()
 
 
-
 # Get user
 @app.route('/api/get_user/<username>/<password>', methods=['GET'])
 def get_user(username, password):
     cur = conn.cursor()
     try:
-        cur.execute("SELECT * FROM user_credentials WHERE username = %s", (username,))
+        cur.execute(
+            "SELECT * FROM user_credentials WHERE username = %s", (username,))
         user = cur.fetchone()
         if user is None:
             return 'User not found!'
@@ -88,12 +90,12 @@ def get_user(username, password):
         cur.close()
 
 
-
 @app.route('/api/get_userid/<username>/<password>', methods=['GET'])
 def get_userid(username, password):
     cur = conn.cursor()
     try:
-        cur.execute("SELECT * FROM user_credentials WHERE username = %s", (username,))
+        cur.execute(
+            "SELECT * FROM user_credentials WHERE username = %s", (username,))
         user = cur.fetchone()
         if user is None:
             return 'User not found!'
@@ -106,7 +108,6 @@ def get_userid(username, password):
         return 'Error: ' + str(e)
     finally:
         cur.close()
-
 
 
 @app.route('/api/get_user_habits/<username>/<password>', methods=['GET'])
@@ -126,16 +127,15 @@ def get_user_habits(username, password):
         cur.close()
 
 
-
-@app.route('/api/create_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>', methods=['POST'])
-def create_habit(username, password, habit_name, metric_name, metric_value):
+@app.route('/api/create_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>/<goal_value>', methods=['POST'])
+def create_habit(username, password, habit_name, metric_name, metric_value, goal_value):
     cur = conn.cursor()
     try:
         user_id = get_userid(username, password)
         if user_id == 'Incorrect password!':
             return 'Incorrect password!'
-        cur.execute("INSERT INTO habits (user_id, habit_name, metric_name, metric_value) VALUES (%s, %s, %s, %s)",
-                    (user_id, habit_name, metric_name, metric_value))
+        cur.execute("INSERT INTO habits (user_id, habit_name, metric_name, metric_value, goal_value) VALUES (%s, %s, %s, %s, %s)",
+                    (user_id, habit_name, metric_name, metric_value, goal_value))
         conn.commit()
         return 'Habit created!'
     except Exception as e:
@@ -143,7 +143,6 @@ def create_habit(username, password, habit_name, metric_name, metric_value):
         return 'Error: ' + str(e)
     finally:
         cur.close()
-
 
 
 @app.route('/api/delete_habit/<username>/<password>/<habit_name>', methods=['DELETE'])
@@ -161,7 +160,6 @@ def delete_habit(username, password, habit_name):
         return str(e)
 
 
-
 @app.route('/api/update_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>', methods=['PUT'])
 def update_habit(username, password, habit_name, metric_name, metric_value):
     try:
@@ -177,7 +175,6 @@ def update_habit(username, password, habit_name, metric_name, metric_value):
         return str(e)
 
 
-
 # Get habit
 @app.route('/api/get_habit/<username>/<password>/<habit_name>', methods=['GET'])
 def get_habit(username, password, habit_name):
@@ -185,13 +182,13 @@ def get_habit(username, password, habit_name):
     user_id = get_userid(username, password)
     if user_id == 'Incorrect password!':
         return 'Incorrect password!'
-    cur.execute("SELECT * FROM habits WHERE user_id = %s AND habit_name = %s", (user_id, habit_name))
+    cur.execute(
+        "SELECT * FROM habits WHERE user_id = %s AND habit_name = %s", (user_id, habit_name))
     habit = cur.fetchone()
     if habit:
         return str(habit)
     else:
         return 'Habit not found!'
-
 
 
 # Get habit history
@@ -212,7 +209,6 @@ def get_habit_history(username, password, habit_name):
         return str(habit_history)
     except Exception as e:
         return "Error: " + str(e)
-
 
 
 if __name__ == '__main__':
