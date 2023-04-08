@@ -160,21 +160,33 @@ button[type="submit"]:hover {
 
 /* Style the table */
 table {
-  margin-top: 30px;
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
 }
 
 th {
-  text-align: left;
+  background-color: #f2f2f2;
   font-weight: bold;
-  padding: 10px;
-  border-bottom: 2px solid #ddd;
 }
 
-td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
+
+tbody tr:hover {
+  background-color: #e2e2e2;
+}
+
 
 </style>

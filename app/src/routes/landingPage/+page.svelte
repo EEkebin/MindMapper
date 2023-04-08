@@ -54,6 +54,11 @@
     }
   }
 
+  async function logout(){
+    localStorage.clear();
+    window.location.href = "/login";
+  }
+
   async function getHabits(username, password) {
     const response = await fetch(
       "http://localhost:5000/api/get_user_habits/" + username + "/" + password,
@@ -104,6 +109,26 @@
         {/each}
       </select>
     </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Habit Name</th>
+          <th>Metric Name</th>
+          <th>Metric Value</th>
+          <th>Goal Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#each habits as habit}
+        <tr>
+          {#each habit as value}
+          <td>{value}</td>
+          {/each}
+        </tr>
+        {/each}
+      </tbody>
+    </table>
+    <button class= "logout-button"on:click={logout}>Logout</button>
   </div>
 </body>
 
@@ -153,4 +178,23 @@
   button:hover {
     background-color: #0069d9;
   }
+
+  .logout-button {
+  background-color: #f44336;
+  border: none;
+  color: #fff;
+  margin-top: 20px;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
 </style>

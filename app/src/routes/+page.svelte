@@ -1,25 +1,49 @@
-<script>
-  let username = "";
-  let password = "";
-  async function handleSubmit(event) {
-    event.preventDefault();
-    const response = await fetch(
-      `http://localhost:5000/api/create_user/${username}/${password}`,
-      {
-        method: "POST",
-      }
-    );
-    const status = await response.status;
-    if (status === 200) {
-      window.location.href = "/landingPage";
-    } else {
-      alert("Registration failed. Please check your username and password.");
-    }
-  }
-</script>
+<body>
+	<div class="container">
+		<h1>Mind Mapper</h1>
+		<button on:click={() => window.location.href = "/login"}>Login</button>
+	</div>
+</body>
 
-<form on:submit={handleSubmit}>
-  <input type="text" bind:value={username} placeholder="Username" />
-  <input type="password" bind:value={password} placeholder="Password" />
-  <button type="submit">Register</button>
-</form>
+<head>
+	<title>Mind Mapper</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #f1f1f1;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 100px 20px;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 5rem;
+			font-weight: bold;
+			color: #333;
+			margin-bottom: 20px;
+		}
+
+		button {
+			padding: 12px 24px;
+			border: none;
+			border-radius: 4px;
+			background-color: #007bff;
+			color: #fff;
+			font-size: 1.5rem;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #0069d9;
+		}
+	</style>
+</head>
+
+

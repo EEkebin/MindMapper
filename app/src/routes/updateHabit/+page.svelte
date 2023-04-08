@@ -16,7 +16,6 @@
       username = localStorage.getItem("username");
       password = localStorage.getItem("password");
       habit_name = localStorage.getItem("habit");
-      console.log(habit_name)
       // Get habits from database http://localhost:5000/api/get_habits/username/password
       habits = await getHabit(username, password, habit_name);
       metric_name = habits[1];
@@ -41,9 +40,9 @@
     }
 
     //update habit '/api/update_habit/<username>/<password>/<habit_name>/<metric_name>/<metric_value>'
-    async function update_habit(metric_value) {
+    async function update_habit() {
       const response = await fetch(
-        `http://localhost:5000/api/update_habit/${username}/${password}/${habit_name}/${metric_name}/${metric_value}/${goal_value}`,
+        `http://localhost:5000/api/update_habit/${username}/${password}/${habit_name}/${metric_name}/${metric_value}`,
         {
           method: "PUT",
         }
