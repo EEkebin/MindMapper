@@ -27,8 +27,6 @@ def verify_password(password: str, hashed_password: str) -> bool:
 def hello_world():
     return 'Welcome to MindMapper!'
 
-# Create a new user
-
 
 @app.route('/create_user/<username>/<password>', methods=['POST'])
 def create_user(username, password):
