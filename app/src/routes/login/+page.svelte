@@ -1,23 +1,30 @@
-<!DOCTYPE html>
-<!-- svelte-ignore a11y-missing-attribute -->
-
 <head>
-	<title>Placeholder Title</title>
+    <title>Placeholder Title</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Login</h1>
-		<form>
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username" placeholder="Enter your username">
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" placeholder="Enter your password">
-			<input type="submit" value="Login">
-		</form>
-		<div class="create-account">
-			Don't have an account? <a href="/register">Create one</a>.
-		</div>
-	</div>
+    <div class="container">
+        <h1>Login</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+            />
+            <label for="password">Password:</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+            />
+            <input type="submit" value="Login" />
+        </form>
+        <div class="create-account">
+            Don't have an account? <a href="/register">Create one</a>.
+        </div>
+    </div>
 </body>
 
 <style>
@@ -36,7 +43,8 @@
     h1 {
         text-align: center;
     }
-    input[type="text"], input[type="password"] {
+    input[type="text"],
+    input[type="password"] {
         border: none;
         border-bottom: 2px solid #ccc;
         font-size: 16px;
