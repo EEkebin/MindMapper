@@ -1,9 +1,11 @@
-from flask import Flask
+from flask import Flask, jsonify, make_response
+from flask_cors import CORS
 import psycopg2
 import os
 import bcrypt
 
 app = Flask(__name__)
+CORS(app)
 
 conn = psycopg2.connect(
     host="74.207.249.96",
@@ -110,19 +112,40 @@ def get_userid(username, password):
         cur.close()
 
 
+# Login user
+@app.route('/api/login_user/<username>/<password>', methods=['GET'])
+def login_user(username, password):
+    cur = conn.cursor()
+    try:
+        cur.execute(
+            "SELECT * FROM user_credentials WHERE username = %s", (username,))
+        user = cur.fetchone()
+        if user is None:
+            return 'User not found!', 401
+        if verify_password(password, user[2]):
+            return 'Login successful!', 200
+        else:
+            return 'Incorrect password!', 401
+    except Exception as e:
+        # Handle the exception here
+        return 'Error: ' + str(e), 500
+    finally:
+        cur.close()
+
+
 @app.route('/api/get_user_habits/<username>/<password>', methods=['GET'])
 def get_user_habits(username, password):
     cur = conn.cursor()
     try:
         user_id = get_userid(username, password)
         if user_id == 'Incorrect password!':
-            return 'Incorrect password!'
+            return 'Incorrect password!', 401
         cur.execute("SELECT * FROM habits WHERE user_id = %s", (user_id,))
         habits = cur.fetchall()
-        return str(habits)
+        return jsonify(habits), 200
     except Exception as e:
         # Handle the exception here
-        return 'Error: ' + str(e)
+        return 'Error: ' + str(e), 500
     finally:
         cur.close()
 

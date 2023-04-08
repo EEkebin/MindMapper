@@ -1,6 +1,29 @@
+<script>
+  import { onMount } from "svelte";
+
+  onMount(async () => {
+    const response = await fetch(
+      `http://localhost:5000/api/get_user_habits/${localStorage.getItem(
+        "username"
+      )}/${localStorage.getItem("password")}`,
+      {
+        method: "GET",
+      }
+    );
+    const status = await response.status;
+    console.log(status);
+    if (status === 200) {
+      const habits = await response.json();
+      console.log(habits);
+      return habits;
+    } else {
+      alert("Login failed. Please check your username and password.");
+    }
+  });
+</script>
+
 <head>
   <title>My Landing Page</title>
-  <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
   <div class="tiles">

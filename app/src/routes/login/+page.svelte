@@ -1,16 +1,41 @@
+<script>
+    let username = "";
+    let password = "";
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const response = await fetch(
+            `http://localhost:5000/api/login_user/${username}/${password}`,
+            {
+                method: "GET",
+            }
+        );
+        const status = await response.status;
+        if (status === 200) {
+            window.addEventListener("beforeunload", (event) => {
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+            });
+            window.location.href = "/landingPage";
+        } else {
+            alert("Login failed. Please check your username and password.");
+        }
+    }
+</script>
+
 <head>
     <title>Placeholder Title</title>
 </head>
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form>
+        <form on:submit={handleSubmit}>
             <label for="username">Username:</label>
             <input
                 type="text"
                 id="username"
                 name="username"
                 placeholder="Enter your username"
+                bind:value={username}
             />
             <label for="password">Password:</label>
             <input
@@ -18,6 +43,7 @@
                 id="password"
                 name="password"
                 placeholder="Enter your password"
+                bind:value={password}
             />
             <input type="submit" value="Login" />
         </form>
