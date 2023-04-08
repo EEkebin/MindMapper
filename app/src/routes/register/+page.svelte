@@ -1,10 +1,37 @@
+<script>
+    let username = "";
+    let password = "";
+    let confirmPassword = "";
+    async function handleSubmit(event) {
+        event.preventDefault();
+        if (password !== document.getElementById("confirm-password").value) {
+            alert("Passwords do not match.");
+            return;
+        }
+        const response = await fetch(
+            `http://localhost:5000/api/create_user/${username}/${password}`,
+            {
+                method: "POST",
+            }
+        );
+        const status = await response.status;
+        if (status === 200) {
+            window.location.href = "/landingPage";
+        } else {
+            alert(
+                "Registration failed. User either already exists, or passwords do not match."
+            );
+        }
+    }
+</script>
+
 <head>
     <title>Placeholder Title</title>
 </head>
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form>
+        <form on:submit={handleSubmit}>
             <label for="username">Username:</label>
             <input
                 type="text"
@@ -12,6 +39,7 @@
                 name="username"
                 placeholder="Enter your username"
                 required
+                bind:value={username}
             />
             <label for="password">Password:</label>
             <input
@@ -20,6 +48,7 @@
                 name="password"
                 placeholder="Enter your password"
                 required
+                bind:value={password}
             />
             <label for="confirm-password">Confirm Password:</label>
             <input
@@ -28,6 +57,7 @@
                 name="confirm-password"
                 placeholder="Confirm your password"
                 required
+                bind:value={confirmPassword}
             />
             <input type="submit" value="Register" />
         </form>
