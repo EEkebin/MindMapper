@@ -1,25 +1,40 @@
-<!DOCTYPE html>
-<!-- svelte-ignore a11y-missing-attribute -->
-
 <head>
-	<title>Placeholder Title</title>
+    <title>Placeholder Title</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Register</h1>
-		<form>
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username" placeholder="Enter your username" required>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" placeholder="Enter your password" required>
-			<label for="confirm-password">Confirm Password:</label>
-			<input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-			<input type="submit" value="Register">
-		</form>
-		<div class="create-account">
-			Already have an account? <a href="/login">Login</a>.
-		</div>
-	</div>
+    <div class="container">
+        <h1>Register</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your username"
+                required
+            />
+            <label for="password">Password:</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+            />
+            <label for="confirm-password">Confirm Password:</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm your password"
+                required
+            />
+            <input type="submit" value="Register" />
+        </form>
+        <div class="create-account">
+            Already have an account? <a href="/login">Login</a>.
+        </div>
+    </div>
 </body>
 
 <style>
@@ -38,7 +53,8 @@
     h1 {
         text-align: center;
     }
-    input[type="text"], input[type="password"] {
+    input[type="text"],
+    input[type="password"] {
         border: none;
         border-bottom: 2px solid #ccc;
         font-size: 16px;
