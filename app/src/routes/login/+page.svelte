@@ -50,7 +50,7 @@
         font-size: 16px;
         margin-bottom: 20px;
         padding: 10px;
-        width: 100%;
+        width: 95%;
     }
     input[type="submit"] {
         background-color: #007bff;
@@ -60,7 +60,7 @@
         cursor: pointer;
         font-size: 16px;
         padding: 10px;
-        width: 100%;
+        width: 95%;
     }
     input[type="submit"]:hover {
         background-color: #0069d9;

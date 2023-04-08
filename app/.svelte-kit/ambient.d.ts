@@ -49,7 +49,6 @@ declare module '$env/static/private' {
 	export const NODE_PATH: string;
 	export const npm_command: string;
 	export const npm_config_engine_strict: string;
-	export const npm_config_node_gyp: string;
 	export const npm_config_registry: string;
 	export const npm_config_user_agent: string;
 	export const npm_execpath: string;
@@ -82,6 +81,7 @@ declare module '$env/static/private' {
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
+	export const PNPM_HOME: string;
 	export const PNPM_SCRIPT_SRC_DIR: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
@@ -93,6 +93,7 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
+	export const REFRESH_ENV_VARS: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -158,7 +159,6 @@ declare module '$env/dynamic/private' {
 		NODE_PATH: string;
 		npm_command: string;
 		npm_config_engine_strict: string;
-		npm_config_node_gyp: string;
 		npm_config_registry: string;
 		npm_config_user_agent: string;
 		npm_execpath: string;
@@ -191,6 +191,7 @@ declare module '$env/dynamic/private' {
 		OS: string;
 		Path: string;
 		PATHEXT: string;
+		PNPM_HOME: string;
 		PNPM_SCRIPT_SRC_DIR: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
@@ -202,6 +203,7 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
+		REFRESH_ENV_VARS: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
