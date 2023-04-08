@@ -1,30 +1,6 @@
-<script>
-  // Get habits from database and store in array
-  import { onMount } from "svelte";
-
-  let habits = [""];
-
-  // On mount, get habits from database
-  onMount(async () => {
-    // Get username from localstorage
-    let username = localStorage.getItem("username");
-    let password = localStorage.getItem("password");
-    // Get habits from database http://localhost:5000/api/get_habits/username/password
-    habits = await getHabits(username, password);
-  });
-
-  async function getHabits(username, password) {
-    const response = await fetch("http://localhost:5000/api/get_user_habits/" + username + "/" + password, {
-      method: "GET",
-    });
-    const data = await response.json();
-    console.log(data);
-    return data;
-  }
-</script>
-
 <head>
   <title>My Landing Page</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
   <div class="tiles">
@@ -45,14 +21,6 @@
       <button>Update</button>
     </div>
   </div>
-
-  <!-- List of habits -->
-  <h2>List of Habits</h2>
-  <ul>
-    {#each habits as habit}
-      <li>{habit.name}</li>
-    {/each}
-  </ul>
 </body>
 
 <style>
