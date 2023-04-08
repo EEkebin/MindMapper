@@ -3,5 +3,6 @@
 	"/createHabit": [],
 	"/landingPage": [],
 	"/login": [],
-	"/register": []
+	"/register": [],
+	"/updateHabit": []
 }

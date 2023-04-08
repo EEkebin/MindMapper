@@ -2,30 +2,72 @@
   // Get habits from database and store in array
   import { onMount } from "svelte";
 
-  let habits = [""];
-  // On mount, get habits from database
   onMount(async () => {
     // Get username from localstorage
     let username = localStorage.getItem("username");
     let password = localStorage.getItem("password");
+    let habit = document.querySelector("#habit-list-update").value;
+    localStorage.setItem("habit", habit);
     // Get habits from database http://localhost:5000/api/get_habits/username/password
     habits = await getHabits(username, password);
   });
 
-  async function getHabits(username, password) {
-    const response = await fetch("http://localhost:5000/api/get_user_habits/" + username + "/" + password, {
-      method: "GET",
-    });
-    const data = await response.json();
-    console.log(data);
-    const habits = [];
-  for (let i = 0; i < data.length; i++) {
-    const habit = data[i];
-    habits.push([habit[2], habit[3], habit[4], habit[5]]);
-  }
-  return habits;
+  let habits = [""];
+  // On mount, get habits from database
 
-    return data;
+  async function updateHabit(event) {
+    event.preventDefault();
+    let habit = document.querySelector("#habit-list-update").value;
+    localStorage.setItem("habit", habit);
+
+    //open page updateHabit
+    window.location.href = "/updateHabit";
+
+    // Check if habits array is empty
+    if (habits.length === 0) {
+      alert("You have no habits to update");
+      return;
+    }
+  }
+
+  async function deleteHabit(event) {
+    event.preventDefault();
+    let username = localStorage.getItem("username");
+    let password = localStorage.getItem("password");
+    let habit_name = document.querySelector("#habit-list").value;
+
+    // Check if habits array is empty
+    if (habits.length === 0) {
+      alert("You have no habits to delete");
+      return;
+    }
+
+    const response = await fetch(
+      `http://localhost:5000/api/delete_habit/${username}/${password}/${habit_name}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (response.ok) {
+      alert("Habit Deleted Successfully");
+      habits = await getHabits(username, password);
+    }
+  }
+
+  async function getHabits(username, password) {
+    const response = await fetch(
+      "http://localhost:5000/api/get_user_habits/" + username + "/" + password,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    const habits = [];
+    for (let i = 0; i < data.length; i++) {
+      const habit = data[i];
+      habits.push([habit[2], habit[3], habit[4], habit[5]]);
+    }
+    return habits;
   }
 </script>
 
@@ -44,21 +86,25 @@
     </div>
     <div class="tile">
       <h2>Delete Habits</h2>
-      <button>Delete</button>
+      <button id="delete-btn" on:click={deleteHabit}>Delete</button>
+      <h3>List of Habits</h3>
+      <select id="habit-list">
+        {#each habits as habit}
+          <option value={habit[0]}>{habit[0]}</option>
+        {/each}
+      </select>
     </div>
     <div class="tile">
       <h2>Update Current Habits</h2>
-      <button>Update</button>
+      <button on:click={updateHabit}>Update</button>
+      <h3>List of Habits</h3>
+      <select id="habit-list-update">
+        {#each habits as habit}
+          <option value={habit[0]}>{habit[0]}</option>
+        {/each}
+      </select>
     </div>
   </div>
-
-  <!-- List of habits -->
-  <h2>List of Habits</h2>
-  <ul>
-    {#each habits as habit}
-      <li>{habit[0]}</li>
-    {/each}
-  </ul>
 </body>
 
 <style>
