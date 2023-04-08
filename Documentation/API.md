@@ -8,12 +8,12 @@ MindMapper's API allows integration with self-hosted PostgreSQL Databases
 # Build Instructions
 
 ## Dependencies
-> Python 3.10.11: [Click Here for Download](https://www.python.org/downloads/release/python-31011/)
+> Python 3.10.11: [Click Here for Download Options](https://www.python.org/downloads/release/python-31011/)
 
 > PostgreSQL: [Click Here for Installation Instructions](https://www.postgresql.org/download/)
 
 ***Although not required, we recommend using DBeaver rather than PGAdmin to manage your database(s).***
-> DBeaver [Click Here for Download](https://dbeaver.io/download/)
+> DBeaver [Click Here for Download Options](https://dbeaver.io/download/)
 
 ## Building and Running WebApp
 1. Clone the GitHub Repo:
