@@ -1,12 +1,11 @@
 <head>
   <title>Create Habit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
   <div class="form-wrapper">
     <h1>Create Habit</h1>
-    <form method="POST" action="submit_habit.php">
+    <form method="POST">
       <label for="habit-name">Habit Name:</label>
       <input type="text" id="habit-name" name="habit_name" required />
       <label for="metric-name">Metric Name:</label>
